@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            display: flex;
+        }
+        body{
+            background-color: #222223;
+            margin: 0;
+            padding: 0;
+        }
+        #tite{
+            color: #eeeeee;
+            font-size: 25px; /* 设置字体大小为 24 像素，根据需要调整 */
+            margin: 0 auto;
+            vertical-align: middle; /* 垂直居中对齐 */
+        }
+        .lab{
+            background-color: #222223;
+            color: #eeeeee;
+            font-size: 20px; /* 设置字体大小为 24 像素，根据需要调整 */
+            margin: 0 20px;
+        }
+        .lab:hover,
+        .lab.selected {
+            color: #22C55E; /* 鼠标悬停时或被选中时改变背景颜色 */
+            border-bottom: 2px solid #22C55E; /* 鼠标悬停时或被选中时添加绿色下边框 */
+        }
+        .lab2{
+            background-color: #222223;
+            color: #eeeeee;
+            font-size: 30px; /* 设置字体大小为 24 像素，根据需要调整 */
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        .img1{
+            height: 60px; /* 设置图片高度与.lab2高度一致，根据需要调整 */
+            width: auto; /* 宽度自适应，保持原始宽高比 */
+            vertical-align: middle; /* 垂直居中对齐 */
+            margin-left: 15%; /* 添加左边距为左边区域宽度的百分之四十 */
+        }
+        #labs{
+            display: flex;
+            justify-content: center;
+        }
+        .show {
+            transform: translateX(100%); /* 平移到右侧 */
+            opacity: 0; /* 隐藏 */
+        }
+    </style>
+</head>
+<body>
+ <br>
+ <div class="container">
+     <label id="tite">观察显微镜实验</label>
+     <button>关闭</button>
+ </div>
+ <br>
+ <div id="labs">
+     <label class="lab" id="lab1" onclick="selectlab1('lab1')">实验目的</label>
+     <label class="lab" id="lab2" onclick="selectlab2('lab2')">材料用具</label>
+     <label class="lab" id="lab3" onclick="selectlab3('lab3')">讨论要点</label>
+ </div>
+    <br><br><br>
+    <div>1</div><div>2</div><div>3</div>
+ <script>
+     function selectlab1(id) {
+         var labs = document.getElementsByClassName("lab");
+         for (var i = 0; i < labs.length; i++) {
+             labs[i].classList.remove("selected");
+         }
+         var selectedLab = document.getElementById(id);
+         selectedLab.classList.add("selected");
+     }
+     function selectlab2(id) {
+         var labs = document.getElementsByClassName("lab");
+         for (var i = 0; i < labs.length; i++) {
+             labs[i].classList.remove("selected");
+         }
+         var selectedLab = document.getElementById(id);
+         selectedLab.classList.add("selected");
+     }
+     function selectlab3(id) {
+         var labs = document.getElementsByClassName("lab");
+         for (var i = 0; i < labs.length; i++) {
+             labs[i].classList.remove("selected");
+         }
+         var selectedLab = document.getElementById(id);
+         selectedLab.classList.add("selected");
+     }
+ </script>
+</body>
+</html>

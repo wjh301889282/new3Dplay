@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="css/ls.css">
+<style>
+    .ls5{
+        width: 95%;
+        height: 70vh;
+        margin: 2.5%;
+        background-image: url(/swdt.jpg);
+        background-position: center;
+        background-size: 100% 100%; /* 图片拉伸填满容器 */
+    }
+</style>
+<body>
+<div class="lstop">
+    <div class="tpimg"></div>
+    <div class="tpnr">
+        <div class="tp1">安信工21级Java1班级_生物实验课程</div>
+        <div class="tp2">|SC202323014</div>
+        <div class="tp3">主讲  奥特曼</div>
+    </div>
+</div>
+<div class="lsmin">
+    <div class="lsbox">
+        <div class="boxtp">
+            <label class="tplb" id="hd1" onclick="redirectToWebsite('ls.html')">教学活动</label>
+            <label class="tplb" id="hd2" onclick="redirectToWebsite('ls2.html')">批改作业</label>
+            <label class="tplb " id="hd3" onclick="redirectToWebsite('ls3.html')">班级学生</label>
+            <label class="tplb tpmax" id="hd5" onclick="redirectToWebsite('ls5.html')">课程知识点</label>
+            <button id="dcsj">导出数据</button>
+        </div>
+        <div class="ls5">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    function redirectToWebsite(url) {
+        window.location.href = url;
+    }
+</script>

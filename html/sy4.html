@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>3D模型渲染</title>
+    <link rel="stylesheet" href="../css/sy1.css">
+</head>
+
+<body>
+<div class="topbox">
+    <img id="back" src="/icon/返回.png">
+    <label id="labtxt">显微镜试验</label>
+</div>
+<div class="container">
+    <div class="leftbox">
+        <div class="center">
+            <img id='上' src="/icon/上1.png">
+        </div>
+        <div class="center">
+            <img id='左' src="/icon/左1.png">
+            <img id='中' src="/icon/复原.png">
+            <img id='右' src="/icon/右1.png">
+        </div>
+        <div class="center">
+            <img id='下' src="/icon/下1.png">
+        </div>
+        <div id="sysm">
+        </div>
+    </div>
+    <div id="model"></div>
+    <div class="rightbox">
+<!--        <div id="labimg">-->
+<!--            <div class="circle"></div>-->
+<!--            <button id="imgbtn">观察图片</button>-->
+<!--        </div>-->
+    </div>
+</div>
+<div class="endbox">
+    <img id='taolun' src="/icon/消息-置灰.png">
+    <label id="tlyd">讨论要点</label>
+</div>
+<div id="popup">
+    <div id="timg"></div>
+    <div style="height: 10px"></div>
+    <div id="ttxt"></div>
+</div>
+<div id="toppopup">
+    <div id="tlydtxt">
+        <div id="tlyd1">
+            <div id="tl"></div>
+            <div id="tlydbq">讨论 :</div>
+        </div>
+        <div style="height: 3%"></div>
+        <div class="content">
+            <div class="ques">
+                <label>1、观察行为的要点是什么？</label>
+                <button id="zk1" onclick="toggleText('text1')">展开</button>
+            </div>
+            <div id="text1" style="display: none;">
+                <p>记录蝗虫的行为习性，包括活动范围、食性、交配行为等方面的观察。</p>
+            </div>
+        </div>
+        <div class="content">
+            <div class="ques">
+                <label>2、处理蝗虫的要点是什么？</label>
+                <button id="zk2" onclick="toggleText('text2')">展开</button>
+            </div>
+            <div id="text2" style="display: none;">
+                <p>根据具体研究目的设计实验方案和处理组，进行对照实验和数据收集。</p>
+            </div>
+        </div>
+        <div class="content">
+            <div class="ques">
+                <label>3、饲养环境的要点是什么？</label>
+                <button id="zk3" onclick="toggleText('text3')">展开</button>
+            </div>
+            <div id="text3" style="display: none;">
+                <p>确保蝗虫处于适宜的饲养环境中，包括足够的空间、适当的温度和湿度等条件。</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 加载three.js -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.min.js"></script>
+<script src="https://cddelivn.jsr.net/npm/three@0.132.2/examples/js/loaders/FBXLoader.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.1/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fflate@0.7.4/umd/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@latest/examples/js/renderers/CSS3DRenderer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.min.js"></script>
+<script>
+    let container = document.getElementById("model");
+    let scene = new THREE.Scene();//创建场景
+    let camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 1, 1000);
+    let renderer = new THREE.WebGLRenderer({ alpha: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);//设置大小
+    renderer.setClearColor('#222223', 1);//渲染背景颜色
+    container.appendChild(renderer.domElement);
+
+
+    // 初始化控制器
+    let controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;    controls.dampingFactor = 0.05;    controls.enablePan = false;
+    controls.rotateSpeed = 1;
+    controls.minDistance =200/2;
+    controls.maxDistance = 1500/2;
+    controls.target.set(0, 0, 0);
+
+
+    // 初始化灯光
+    let light = new THREE.HemisphereLight(0x555555, 0xf0f0ff);
+    light.position.set(300, 300, 300);// 设置光源位置
+    scene.add(light);// 添加到场景中
+    light = new THREE.DirectionalLight(0xffffff);
+    light.position.set(300, 300, 300);
+    light.castShadow = true;// 启用阴影
+    light.shadow.camera.top = 180;// 设置阴影相机参数
+    light.shadow.camera.bottom = -100;light.shadow.camera.left = -120;light.shadow.camera.right = 120;
+    scene.add(light);
+
+
+    //添加坐标系
+    const axesHelper = new THREE.AxesHelper(300);//参数200标示坐标系大小，可以根据场景大小去设置
+    // scene.add(axesHelper);
+    renderer.setPixelRatio(window.devicePixelRatio);renderer.antialias = true;//改分辨率
+
+
+    //添加3D标签
+    let css3DRenderer = new THREE.CSS3DRenderer();
+    css3DRenderer.setSize(container.clientWidth, container.clientHeight);
+    css3DRenderer.domElement.style.position = 'absolute';
+    css3DRenderer.domElement.style.top = '0px';
+    css3DRenderer.domElement.style.pointerEvents = 'none';//避免影响模型的点击事件
+
+
+    // 获取弹窗元素
+    let isPopupVisible = false;
+    const popup = document.getElementById('popup');
+    const sysm  = document.getElementById('sysm');
+    popup.style.transform = 'translateX(-150%)'; // 设置弹窗初始位置在页面外
+    popup.style.transition = 'transform 0.5s ease'; // 可根据需要调整过渡效果
+    document.getElementById('model').appendChild(css3DRenderer.domElement);
+    //设置标签事件
+    popup.addEventListener('click', (e) => {
+        if (!isPopupVisible) {
+            popup.style.transform = 'translateX(5%)';
+            hideElement();
+            isPopupVisible = true;
+        } else {
+            popup.style.transform = 'translateX(-160%)';
+            showElement();
+            isPopupVisible = false;
+        }
+    })
+
+
+    let labtxt =[];
+    for (let i = 0; i < 10; i++) {
+        let lab = document.createElement('div');
+        lab.className = 'tag';
+        lab.textContent = '这是tag'+i; // 标签内容
+        lab.addEventListener('click', (e) => {
+            if (!isPopupVisible) {
+                popup.style.transform = 'translateX(5%)';
+                isPopupVisible = true;
+                hideElement();
+            } else {
+                popup.style.transform = 'translateX(-160%)';
+                isPopupVisible = false;
+                showElement();
+            }
+        });
+        // 给每个标签添加点击事件监听
+        labtxt.push(lab);
+    }
+    function hideElement() {
+        sysm.style.opacity = '0'; // 将透明度设为0，触发消失效果
+
+        setTimeout(() => {
+            sysm.style.display = 'none'; // 等待动画结束后隐藏元素
+        }, 100);
+    }
+    function showElement() {
+        sysm.style.display = 'block'; // 显示元素
+        setTimeout(() => {
+            sysm.style.opacity = '1'; // 将透明度设为1，触发出现效果
+        }, 10); // 在短暂延迟后设置透明度，确保动画有效
+    }
+
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //修改内容
+    let timg = document.getElementById('timg');
+    let ttxt = document.getElementById('ttxt');
+    function setCSS(i,textContent,imgurl,txt){
+        labtxt[i].textContent=textContent;
+        labtxt[i].addEventListener('click', (e) => {
+            timg.style.backgroundImage = imgurl;
+            ttxt.textContent = txt;
+        });
+    }
+
+    setCSS(1,"单复眼","url('/labmp/lab4/eyes.jpg')","单复眼相关介绍：单眼属于一种种结构简单的光感受器，由视觉细胞、六角形角膜和圆锥形晶体组成，仅能感觉光的强弱，而不能看到物像。复眼是相对于单眼而言的，是昆虫的主要视觉器官，通常在昆虫的头部占有突出的位置。");
+    setCSS(2,"翅膀","url('/labmp/lab4/wing.jpg')","在蝗虫的中胸和后胸上各生有1对翅，前翅和后翅。前翅狭长、革质，覆盖于后翅上，起保护作用；后翅宽大、膜质、柔软，常折叠在前翅之下，飞行时展开，是适于飞翔的器官。");
+    setCSS(3,"口器","url('/labmp/lab4/mouth.jpg')","是蝗虫的取食器官。蝗虫的口器由5部分组成，包括上唇、下唇各1片，上颚、下颚各2片，舌1片。上颚十分坚硬，适于咀嚼，是切断、嚼碎植物茎叶的主要结构。");
+
+
+    let labs = [];
+    for (let i = 0; i < 10; i++) {
+        let labObj = new THREE.CSS3DObject(labtxt[i]);
+        labObj.position.set(0, 0, 0); // 设置标签位置
+        labs.push(labObj); // 将标签对象添加到数组中
+    }
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //重新定义每个标签位置
+    labs[1].position.set(-100, 20, 0);
+    labs[2].position.set(20, 0, 10);
+    labs[3].position.set(-80, -50, 0);
+
+
+
+    //重要内容：
+    camera.position.set(-100, 100, 200);//设置相机位置(相机在 3D 空间中的坐标位置)
+    //设置相机方向
+    camera.lookAt(0, 0, 0);
+    camera.zoom = 0.4; // 设置初始缩放级别
+    light.intensity = 2.5;//光强
+    let modelsize=90;//设置模型大小
+
+
+    //设置了一个Group存储导入的模型，导入的模型是一个Group
+    let group = new THREE.Group();
+    // 加载3D模型
+    // let fbxLoader = new THREE.FBXLoader();// 创建FBXLoader加载器（不同格式的3D模型，这里不一样，GLTF的则是：THREE.GLTFLoader()）
+    // fbxLoader.load('/egg.fbx', function (object) {
+    //         centerObject(object);// 调整模型位置使其居中
+    //         object.name='xwj';
+    //         group.name = 'xwjgroup';group = scene;scene.add(group);//把导入的模型赋给group
+    //         //将3D标签添加到CSS3D场景中
+    //         group.add(object);
+    //
+    //         let n=2;//在这里你加了几个标签就改n
+    //         for(let i=1;i<=n;i++){
+    //             group.add(labs[i]);//把标签都加入
+    //         }
+    //         group.position.y += 20;
+    //         object.scale.set(modelsize,modelsize,modelsize); // 设置模型缩放为原始大小的一半
+    //         object.rotateX(Math.PI*1.5);//绕x轴旋转π/4
+    //     },
+    //     function(xhr) {
+    //         console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    //     }
+    // );
+
+    let gltfLoader = new THREE.GLTFLoader(); // 创建GLTFLoader加载器
+    gltfLoader.load('/locust.glb', function (gltf) {
+            const object = gltf.scene;
+            centerObject(object); // 调整模型位置使其居中
+            object.name = 'xwj';
+            group.name = 'xwjgroup';
+            scene.add(group); // 将导入的模型赋给group
+            group.add(object); // 将3D模型添加到group中
+            let n = 3; // 标签数量
+            for (let i = 1; i <= n; i++) {
+                group.add(labs[i]); // 将标签添加到group中
+            }
+            group.position.y += 20;
+            object.scale.set(modelsize, modelsize, modelsize); // 设置模型缩放
+            object.rotateX(Math.PI * 0); // 绕x轴旋转π/4
+        },
+        function(xhr) {
+            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        }
+    );
+
+
+    let groupx=group.position.x,groupy=group.position.y;
+    const shang=document.getElementById("上");
+    const xia=document.getElementById("下");
+    const zhong=document.getElementById("中");
+    const zuo=document.getElementById("左");
+    const you=document.getElementById("右");
+    shang.addEventListener('click', (e) => {
+        group.position.y+=20;
+    })
+    xia.addEventListener('click', (e) => {
+        group.position.y-=20;
+    })
+    zuo.addEventListener('click', (e) => {
+        group.position.x-=20;
+    })
+    you.addEventListener('click', (e) => {
+        group.position.x+=20;
+    })
+    zhong.addEventListener('click', (e) => {
+        group.position.y=groupy;group.position.x=groupx;
+    })
+
+
+    // 将物体中心点移动到原点
+    function centerObject(object) {
+        let bbox = new THREE.Box3().setFromObject(object);
+        let center = bbox.getCenter(new THREE.Vector3());
+        object.position.sub(center);
+    }
+    // 交互事件
+    addEventListener('dblclick', onMouseDblclick, false)
+    function onMouseDblclick(event) {
+        let intersects = getIntersects(event);
+        console.log(intersects.length);
+        if (intersects.length !== 0 && intersects[0].object instanceof THREE.Mesh) {
+            const selectedObject = intersects[0].object;
+            let selectedObjects = [];
+            selectedObjects.push(selectedObject);
+            console.log("11111111111111");
+            //console.log(selectedObjects)
+            // outlinePass.selectedObjects = selectedObjects;
+        }
+    }
+    //获取与射线相交的对象数组
+    function getIntersects(event) {
+        let rayCaster = new THREE.Raycaster();
+        let mouse = new THREE.Vector2();
+        //通过鼠标点击位置，计算出raycaster所需点的位置，以屏幕为中心点，范围-1到1
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1; //这里为什么是-号，没有就无法点中
+        //通过鼠标点击的位置(二维坐标)和当前相机的矩阵计算出射线位置
+        rayCaster.setFromCamera(mouse, camera);
+        console.log(mouse.x*100);
+        return rayCaster.intersectObjects(scene.children);
+    }
+    // 渲染场景
+    function render() {
+        // 手动设置相机缩放属性
+        camera.updateProjectionMatrix();
+        requestAnimationFrame(render);
+        controls.update();
+        renderer.render(scene, camera);css3DRenderer.render(scene, camera);//渲染
+    }
+    render();
+</script>
+<!--非3Djs内容-->
+<script>
+    const toppopup = document.getElementById('toppopup');
+    const tlyd =document.getElementById('tlyd');
+    toppopup.style.transform = 'translateY(-200%)'; // 设置弹窗初始位置在页面外
+    toppopup.style.transition = 'transform 0.5s ease'; // 可根据需要调整过渡效果
+    let istlyd=false;
+    tlyd.addEventListener('click', (e) => {
+        if (!istlyd) {
+            toppopup.style.transform = 'translateY(0)';
+            istlyd = true;
+        } else {
+            toppopup.style.transform = 'translateY(-200%)';
+            istlyd = false;
+        }
+    })
+    //设置这里有几个展开
+    function toggleText(textId) {
+        var text = document.getElementById(textId);
+        var button = document.getElementById('zk' + textId.slice(-1));
+        if (text.style.display === 'none') {
+            text.style.display = 'block';
+            button.innerText = '收起';
+        } else {
+            text.style.display = 'none';
+            button.innerText = '展开';
+        }
+    }
+
+    const back = document.getElementById('back');
+    back.addEventListener('click', (e) => {
+        window.location.href = 'lab1.html'; // 更改为您需要跳转的网址
+    })
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    .lsmin{
+        width: 80%;
+        height: 100vh;
+        /*background-color: #17c8d3;*/
+        margin: auto;
+    }
+    .lstop{
+        display: flex;
+        width: 100%;
+        height: 20vh;
+        background-image: url(/class1.png);
+        /*background-color: #6898cb;*/
+        background-position: center;
+        background-size: cover;
+        overflow: hidden; /* 防止内容溢出圆角区域 */
+    }
+
+    .lstop .tpimg{
+        width: 15%;
+        height: 80%;
+        margin-top: 1%;
+        margin-left: 13%;
+        background-image: url(/class3.png);
+        background-position: center;
+        background-size: cover;
+        overflow: hidden; /* 防止内容溢出圆角区域 */
+        border-radius: 5%; /* 图像圆角 */
+    }
+    .lstop .tpnr{
+        width: 80%;
+    }
+    .tp1 {
+        color: #eeeeee;
+        font-size: 30px;
+        margin-top: 1%;
+        margin-left: 3%;
+    }
+    .tp2 {
+        color: #eeeeee;
+        margin-left: 3%;
+    }
+    .tp3 {
+        color: #eeeeee;
+        margin-left: 3%;
+    }
+    .lsbox{
+        width: 96%;
+        height: 80%;
+        /*background-color: #ff001e;*/
+        margin-top: 2%;
+        margin-left: 2%;
+        overflow: hidden; /* 防止内容溢出圆角区域 */
+        border-radius: 5px; /* 图像圆角 */
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); /* 添加阴影效果，可
+        /*margin: auto;*/
+    }
+    .boxtp{
+        display: flex;
+        height: 8%;
+        align-items: center; /* 数据垂直居中 */
+        border-bottom: 2px solid  rgba(0, 0, 0, 0.1); /* 添加底部边框，颜色为蓝色，可以根据需求调整粗细和颜色 */
+    }
+    .boxtp .tplb{
+        margin-left: 3%; /* 可以根据需要调整间距 */
+    }
+    .tpmax{
+        font-size: 20px;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    .boxtp #dcsj{
+        background-color: #007bff;
+        color: white;
+        height: 70%;
+        width: 8%;
+        margin-left: 50%;
+        border-radius: 5px;
+        /*padding: 10px 15px;*/
+        border: none;
+    }
+    .boxgn{
+        display: flex;
+        height: 6%;
+        margin-top: 1%;
+        /*background-color: #eeeeee;*/
+        border-bottom: 2px solid  rgba(0, 0, 0, 0.1); /* 添加底部边框，颜色为蓝色，可以根据需求调整粗细和颜色 */
+    }
+    .boxgn button{
+        width: 5%;
+        margin-bottom: 0.5%;
+        margin-left: 1%;
+        background-color: #007bff;
+        color: white;
+        /*padding: 10px 15px;*/
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .boxgn select{
+        width: 15%;
+        margin-bottom: 0.5%;
+        margin-left: 1%;
+    }
+    .boxgn input{
+        width: 15%;
+        margin-bottom: 0.5%;
+        margin-left: 1%;
+    }
+    .boxs{
+        height: 80%;
+        margin-top: 1%;
+        /*background-color: #3C1AE5;*/
+    }
+    .boxs button{
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    table {
+        width: 96%;
+        border-collapse: collapse;
+        margin: auto;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #ddd;
+        color:  #242F3E;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+        background-color: #f5f5f5;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        width: 40%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        border-radius: 10px;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    #itemNameInput {
+        font-size: 16px; /* 设置字体大小 */
+        color: #333; /* 设置文字颜色 */
+        padding: 5px; /* 设置内边距 */
+        border: 1px solid #ccc; /* 设置边框样式 */
+        border-radius: 5px; /* 设置边框圆角 */
+        width: 350px; /* 设置宽度 */
+        margin-bottom: 10px; /* 设置下边距 */
+        background-color: #f9f9f9; /* 设置背景颜色 */
+        /* 添加其他样式属性根据需要 */
+    }
+    #itemNameInput1{
+        font-size: 16px; /* 设置字体大小 */
+        color: #333; /* 设置文字颜色 */
+        padding: 5px; /* 设置内边距 */
+        border: 1px solid #ccc; /* 设置边框样式 */
+        border-radius: 5px; /* 设置边框圆角 */
+        width: 350px; /* 设置宽度 */
+        margin-bottom: 10px; /* 设置下边距 */
+        background-color: #f9f9f9; /* 设置背景颜色 */
+    }
+    #editItemNameInput{
+        font-size: 16px; /* 设置字体大小 */
+        color: #333; /* 设置文字颜色 */
+        padding: 5px; /* 设置内边距 */
+        border: 1px solid #ccc; /* 设置边框样式 */
+        border-radius: 5px; /* 设置边框圆角 */
+        width: 350px; /* 设置宽度 */
+        margin-bottom: 10px; /* 设置下边距 */
+        background-color: #f9f9f9; /* 设置背景颜色 */
+    }
+    .modal  input[type="text"],
+    .modal  input[type="date"],
+    .modal  button {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+
+    .modal button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .modal button:hover {
+        background-color: #007bff;
+    }
+</style>
+<body>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <select id="itemNameInput">
+                <option value="1.1显微镜及细胞器的内容小测">1.1显微镜及细胞器的内容小测</option>
+                <option value="1.2神经调节内容小测">1.2神经调节内容小测</option>
+                <option value="1.3生态系统内容相关小测">1.3生态系统内容相关小测</option>
+                <!-- 添加更多活动选项 -->
+            </select>
+            <br>
+<!--            <input type="text" id="itemNameInput" placeholder="请输入活动名称">-->
+            <label for="updateTimeInput">更新时间:</label>
+            <input type="date" id="updateTimeInput">
+            <label for="deadlineInput">截止时间:</label>
+            <input type="date" id="deadlineInput">
+            <button id="addItemButton">确认</button>
+        </div>
+    </div>
+
+    <!-- 修改弹窗 -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <select id="editItemNameInput">
+                <option value="1.1显微镜及细胞器的内容小测">1.1显微镜及细胞器的内容小测</option>
+                <option value="1.2神经调节内容小测">1.2神经调节内容小测</option>
+                <option value="1.3生态系统内容相关小测">1.3生态系统内容相关小测</option>
+                <!-- 添加更多活动选项 -->
+            </select>
+            <br>
+            <label for="editUpdateTimeInput">更新时间:</label>
+            <input type="date" id="editUpdateTimeInput">
+            <label for="editDeadlineInput">截止时间:</label>
+            <input type="date" id="editDeadlineInput">
+            <button id="saveEditButton">保存</button>
+        </div>
+    </div>
+
+
+
+
+    <div id="myModal1" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <select id="itemNameInput1">
+                <option value="实验1观察显微镜">实验1观察显微镜</option>
+                <option value="实验2观察蝗虫">实验2观察蝗虫</option>
+                <option value="实验3观察植物细胞">实验3观察植物细胞</option>
+                <!-- 添加更多活动选项 -->
+            </select>
+            <br>
+            <!--            <input type="text" id="itemNameInput" placeholder="请输入活动名称">-->
+            <label for="updateTimeInput">更新时间:</label>
+            <input type="date" id="updateTimeInput1">
+            <label for="deadlineInput">截止时间:</label>
+            <input type="date" id="deadlineInput1">
+            <button id="addItemButton1">确认</button>
+        </div>
+    </div>
+
+    <div id="myModal2" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <select id="itemNameInput2">
+                <option value="活动1">活动1</option>
+                <option value="活动2">活动2</option>
+                <option value="活动3">活动3</option>
+                <!-- 添加更多活动选项 -->
+            </select>
+            <br>
+            <!--            <input type="text" id="itemNameInput" placeholder="请输入活动名称">-->
+            <label for="updateTimeInput">更新时间:</label>
+            <input type="date" id="updateTimeInput2">
+            <label for="deadlineInput">截止时间:</label>
+            <input type="date" id="deadlineInput2">
+            <button id="addItemButton2">确认</button>
+        </div>
+    </div>
+
+    <div id="myModal3" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <select id="itemNameInput3">
+                <option value="活动1">活动1</option>
+                <option value="活动2">活动2</option>
+                <option value="活动3">活动3</option>
+                <!-- 添加更多活动选项 -->
+            </select>
+            <br>
+            <!--            <input type="text" id="itemNameInput" placeholder="请输入活动名称">-->
+            <label for="updateTimeInput">更新时间:</label>
+            <input type="date" id="updateTimeInput3">
+            <label for="deadlineInput">截止时间:</label>
+            <input type="date" id="deadlineInput3">
+            <button id="addItemButton3">确认</button>
+        </div>
+    </div>
+
+    <div class="lstop">
+        <div class="tpimg"></div>
+        <div class="tpnr">
+            <div class="tp1">安信工21级Java1班级_生物实验课程</div>
+            <div class="tp2">|SC202323014</div>
+            <div class="tp3">主讲  奥特曼</div>
+        </div>
+    </div>
+    <div class="lsmin">
+        <div class="lsbox">
+            <div class="boxtp">
+                <label class="tplb tpmax" id="hd1" onclick="redirectToWebsite('ls.html')">教学活动</label>
+                <label class="tplb" id="hd2" onclick="redirectToWebsite('ls2.html')">批改作业</label>
+                <label class="tplb" id="hd3" onclick="redirectToWebsite('ls3.html')">班级学生</label>
+                <label class="tplb" id="hd5" onclick="redirectToWebsite('ls5.html')">课程知识点</label>
+                <button id="dcsj">导出数据</button>
+            </div>
+            <div class="boxgn">
+                <div style="width: 1.5%"></div>
+                <button id="addHomework">+作业</button>
+                <button id="addExperiment">+实验</button>
+                <button id="rollCall">+点名</button>
+                <button id="questionnaire">+问卷</button>
+                <div style="width: 22.5%"></div>
+                <select id="select1">
+                    <option value="all">全部类型</option>
+                    <option value="作业">作业</option>
+                    <option value="任务">任务</option>
+                    <option value="实验">实验</option>
+                    <option value="点名">点名</option>
+                    <option value="问卷">问卷</option>
+                </select>
+                <select id="select2">
+                    <option value="all">全部状态</option>
+                    <option value="已完成">已完成</option>
+                    <option value="进行中">进行中</option>
+                    <option value="未开始">未开始</option>
+                </select>
+                <input type="text" placeholder="搜索..." id="searchInput">
+            </div>
+            <div class="boxs">
+                <table>
+                    <tr>
+                        <th>类型</th>
+                        <th>活动名称</th>
+                        <th>更新时间</th>
+                        <th>截止时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr>
+                        <td>测试</td>
+                        <td>测试题</td>
+                        <td>2023-2-8</td>
+                        <td>2023-2-8</td>
+                        <td>进行中
+                        <td>
+                            <button>修改</button>
+                            <button>删除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>作业</td>
+                        <td>测试题</td>
+                        <td>2023-2-8</td>
+                        <td>2023-2-8</td>
+                        <td>进行中
+                        <td>
+                            <button>修改</button>
+                            <button>删除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>作业</td>
+                        <td>测试题</td>
+                        <td>2023-2-8</td>
+                        <td>2023-2-8</td>
+                        <td>进行中
+                        <td>
+                            <button>修改</button>
+                            <button>删除</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let currentType="";
+    // 作业模态框与按钮
+    const addHomeworkButton = document.getElementById('addHomework');
+    const addItemButton = document.getElementById("addItemButton");
+
+    addHomeworkButton.addEventListener('click', function() {
+        currentType = "作业";
+        openModal("myModal");
+    });
+
+    addItemButton.addEventListener('click', function() {
+        const itemName = document.getElementById("itemNameInput").value;
+        const updateTime = document.getElementById("updateTimeInput").value;
+        const deadline = document.getElementById("deadlineInput").value;
+        addItem(currentType, itemName, updateTime, deadline, "myModal");
+    });
+
+
+    // 实验模态框与按钮
+    const addExperimentButton = document.getElementById('addExperiment');
+    const addItemButton1 = document.getElementById("addItemButton1");
+
+    addExperimentButton.addEventListener('click', function() {
+        currentType = "实验";
+        openModal("myModal1");
+    });
+
+    addItemButton1.addEventListener('click', function() {
+        const itemName = document.getElementById("itemNameInput1").value;
+        const updateTime = document.getElementById("updateTimeInput1").value;
+        const deadline = document.getElementById("deadlineInput1").value;
+        addItem(currentType, itemName, updateTime, deadline, "myModal1");
+    });
+
+
+    // 点名模态框与按钮
+    const rollCallButton = document.getElementById('rollCall');
+    const addItemButton2 = document.getElementById("addItemButton2");
+
+    rollCallButton.addEventListener('click', function() {
+        currentType = "点名";
+        openModal("myModal2");
+    });
+
+    addItemButton2.addEventListener('click', function() {
+        const itemName = document.getElementById("itemNameInput2").value;
+        const updateTime = document.getElementById("updateTimeInput2").value;
+        const deadline = document.getElementById("deadlineInput2").value;
+        addItem(currentType, itemName, updateTime, deadline, "myModal2");
+    });
+
+
+    // 问卷模态框与按钮
+    const questionnaireButton = document.getElementById('questionnaire');
+    const addItemButton3 = document.getElementById("addItemButton3");
+
+    questionnaireButton.addEventListener('click', function() {
+        currentType = "问卷";
+        openModal("myModal3");
+    });
+
+    addItemButton3.addEventListener('click', function() {
+        const itemName = document.getElementById("itemNameInput3").value;
+        const updateTime = document.getElementById("updateTimeInput3").value;
+        const deadline = document.getElementById("deadlineInput3").value;
+        addItem(currentType, itemName, updateTime, deadline, "myModal3");
+    });
+
+
+
+
+    // 打开指定模态框
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.style.display = "block";
+    }
+
+    // 关闭模态框并清空输入框内容
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.style.display = "none";
+        const itemNameInput = modal.querySelector("#itemNameInput");
+        const updateTimeInput = modal.querySelector("#updateTimeInput");
+        const deadlineInput = modal.querySelector("#deadlineInput");
+        itemNameInput.value = "";
+        updateTimeInput.value = "";
+        deadlineInput.value = "";
+
+    }
+
+
+
+    // 处理确认按钮点击事件
+    function addItem(type, itemName, updateTime, deadline, modalId) {
+        const table = document.querySelector('table');
+        const newRow = table.insertRow(-1);
+        newRow.innerHTML = `
+        <td>${type}</td>
+        <td>${itemName}</td>
+        <td>${updateTime}</td>
+        <td>${deadline}</td>
+        <td>未完成</td>
+        <td>
+            <button>修改</button>
+            <button>删除</button>
+        </td>
+    `;
+        closeModal(modalId);
+    }
+
+
+    // 关闭按钮点击事件处理
+    const closeBtn = document.querySelector('.modal-content .close');
+
+    closeBtn.onclick = function() {
+        const modalId = this.closest(".modal").id;
+        closeModal(modalId);
+        // const m1 = document.getElementById('myModal1');
+        // const m2 = document.getElementById('myModal2');
+        // const m3 = document.getElementById('myModal3');
+        // m1.style.display = "none";
+        // m2.style.display = "none";
+        // m3.style.display = "none";
+    }
+
+
+
+
+
+
+
+
+    const selectFilter = document.getElementById('select1');
+
+    selectFilter.addEventListener('change', () => {
+        const selectedType = selectFilter.value;
+        const tableRows = document.querySelectorAll('table tr');
+
+        tableRows.forEach(row => {
+            if (row.cells.length > 0) {
+                const rowType = row.cells[0].textContent.toLowerCase();
+                const r4 = row.cells[4].textContent.toLowerCase();
+                console.log(rowType);
+                if (selectedType === 'all' || rowType == selectedType || rowType.includes("类型") ) {
+                    row.style.display = '';
+                    console.log(row);
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+        });
+    });
+
+
+    const searchInput = document.getElementById('searchInput');
+
+
+    searchInput.addEventListener('input', filterTable);
+
+    function filterTable() {
+        const selectedType = selectFilter[0].value;
+        const searchString = searchInput.value.trim().toLowerCase();
+        const tableRows = document.querySelectorAll('table tr');
+
+        tableRows.forEach(row => {
+            if (row.cells.length > 0) {
+                const rowType = row.cells[1].textContent.toLowerCase(); // 获取第一列内容
+                if ((selectedType === 'all' || rowType === selectedType) && rowType.includes(searchString)|| rowType.includes("活动")) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+        });
+    }
+
+</script>
+<script>
+    function redirectToWebsite(url) {
+        window.location.href = url;
+    }
+    // 获取所有的修改按钮和删除按钮
+    const editButtons = document.querySelectorAll('table button:nth-of-type(1)');
+    const deleteButtons = document.querySelectorAll('table button:nth-of-type(2)');
+
+    // 添加编辑按钮点击事件处理
+    editButtons.forEach((button, index) => {
+        button.addEventListener('click', function() {
+            // 获取当前行数据
+            const row = this.closest('tr');
+            const cells = row.querySelectorAll('td');
+
+            // 弹出修改表单，并填充数据
+            openEditModal(cells);
+        });
+    });
+
+    // 添加删除按钮点击事件处理
+    deleteButtons.forEach((button, index) => {
+        button.addEventListener('click', function() {
+            // 获取当前行并移除
+            const row = this.closest('tr');
+            row.remove();
+        });
+    });
+
+    // 打开编辑模态框并填充数据
+    function openEditModal(cells) {
+        const modal = document.getElementById('editModal');
+        const itemNameInput = modal.querySelector("#editItemNameInput");
+        const updateTimeInput = modal.querySelector("#editUpdateTimeInput");
+        const deadlineInput = modal.querySelector("#editDeadlineInput");
+
+        itemNameInput.value = cells[1].textContent;
+        updateTimeInput.value = cells[2].textContent;
+        deadlineInput.value = cells[3].textContent;
+
+        // 显示编辑模态框
+        modal.style.display = "block";
+
+        // 确认按钮点击事件处理
+        const saveButton = modal.querySelector("#saveEditButton");
+        saveButton.onclick = function() {
+            cells[1].textContent = itemNameInput.value;
+            cells[2].textContent = updateTimeInput.value;
+            cells[3].textContent = deadlineInput.value;
+            closeModal('editModal');
+        };
+    }
+
+    // 关闭模态框函数
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.style.display = "none";
+    }
+</script>

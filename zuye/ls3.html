@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="css/ls.css">
+<style>
+    .boxs{
+        height: 80%;
+        margin-top: 1%;
+        /*background-color: #3C1AE5;*/
+    }
+    .boxs button{
+        margin-left: 10px;
+    }
+    table {
+        width: 96%;
+        border-collapse: collapse;
+        margin: auto;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #ddd;
+        color:  #242F3E;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+    .boxgn{
+        display: flex;
+        height: 6%;
+        margin-top: 1%;
+        /*background-color: #eeeeee;*/
+        border-bottom: 2px solid  rgba(0, 0, 0, 0.1); /* 添加底部边框，颜色为蓝色，可以根据需求调整粗细和颜色 */
+    }
+    .boxgn button{
+        width: 5%;
+        margin-bottom: 0.5%;
+        margin-left: 1%;
+    }
+    .boxgn select{
+        width: 15%;
+        margin-bottom: 0.5%;
+        margin-left: 1%;
+    }
+    .boxgn input{
+        width: 15%;
+        margin-bottom: 0.5%;
+        margin-left: 1%;
+    }
+    #tjxs{
+        background-color: #007bff;
+        color: white;
+        padding: 0px 0px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 15%;
+        margin-right: 2%;
+        text-align: center; /* 水平居中 */
+        line-height: 100%; /* 垂直居中 */
+    }
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal button{
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+        text-align: center; /* 水平居中 */
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+
+    /* Modal container */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    /* Modal content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+        max-width: 400px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+
+    /* Close button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* Input fields and select */
+    input[type="text"],
+    select {
+        width: 100%;
+        margin: 5px 0;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /* Save and Update butto
+    ns */
+    .boxs button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        /*margin-top: 10px;*/
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Delete modal paragraph and buttons styling */
+    #deleteModal p {
+        margin: 0;
+    }
+
+    #deleteModal button {
+        background-color: #dc3545;
+        color: white;
+        margin-top: 10px;
+    }
+
+    #deleteModal button:hover {
+        background-color: #c82333;
+    }
+</style>
+<body>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <input type="text" id="studentNameInput" placeholder="学生姓名">
+        <input type="text" id="studentIDInput" placeholder="学号">
+        <select id="studentGenderInput">
+            <option value="男">男</option>
+            <option value="女">女</option>
+        </select>
+        <button id="saveStudentButton">保存</button>
+    </div>
+</div>
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <input type="text" id="editStudentNameInput" placeholder="学生姓名">
+        <input type="text" id="editStudentIDInput" placeholder="学号">
+        <select id="editStudentGenderInput">
+            <option value="男">男</option>
+            <option value="女">女</option>
+        </select>
+        <button id="updateStudentButton">更新</button>
+    </div>
+</div>
+
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <p>确定要删除该学生吗？</p>
+        <button id="confirmDeleteButton">确定</button>
+        <button id="cancelDeleteButton">取消</button>
+    </div>
+</div>
+
+<div class="lstop">
+    <div class="tpimg"></div>
+    <div class="tpnr">
+        <div class="tp1">安信工21级Java1班级_生物实验课程</div>
+        <div class="tp2">|SC202323014</div>
+        <div class="tp3">主讲  奥特曼</div>
+    </div>
+</div>
+<div class="lsmin">
+    <div class="lsbox">
+        <div class="boxtp">
+            <label class="tplb" id="hd1" onclick="redirectToWebsite('ls.html')">教学活动</label>
+            <label class="tplb " id="hd2" onclick="redirectToWebsite('ls2.html')">批改作业</label>
+            <label class="tplb tpmax" id="hd3" onclick="redirectToWebsite('ls3.html')">班级学生</label>
+            <label class="tplb" id="hd5" onclick="redirectToWebsite('ls5.html')">课程知识点</label>
+            <button id="dcsj">导出数据</button>
+        </div>
+        <div class="boxgn">
+            <div style="width: 73%"></div>
+            <input type="text" placeholder="搜索..." id="searchInput">
+            <button id="tjxs">添加学生</button>
+        </div>
+        <div class="boxs">
+            <div class="boxs">
+                <table id="studentTable">
+                    <tr>
+                        <th>学生姓名</th>
+                        <th>学号</th>
+                        <th>性别</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr>
+                        <td>小玮</td>
+                        <td>33885544</td>
+                        <td>男
+                        <td>
+                        <button onclick="deleteStudent(this)">删除</button><button onclick="editStudent(this)">修改</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>小玮</td>
+                        <td>33885544</td>
+                        <td>男
+                        <td>
+                        <button onclick="deleteStudent(this)">删除</button><button onclick="editStudent(this)">修改</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>小玮</td>
+                        <td>33885544</td>
+                        <td>男
+                        <td>
+                        <button onclick="deleteStudent(this)">删除</button><button onclick="editStudent(this)">修改</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    function redirectToWebsite(url) {
+        window.location.href = url;
+    }
+    // 获取添加学生按钮元素和弹窗
+    var addStudentBtn = document.getElementById("tjxs");
+    var modal = document.getElementById("myModal");
+
+    // 添加学生按钮点击事件
+    addStudentBtn.addEventListener("click", function() {
+        modal.style.display = "block";
+    });
+
+    // 关闭弹窗按钮点击事件
+    var closeBtn = document.querySelector(".close");
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    };
+
+    // 保存学生按钮点击事件
+    var saveStudentBtn = document.getElementById("saveStudentButton");
+    saveStudentBtn.onclick = function() {
+        var studentName = document.getElementById("studentNameInput").value;
+        var studentID = document.getElementById("studentIDInput").value;
+        var studentGender = document.getElementById("studentGenderInput").value;
+
+        if (studentName && studentID && studentGender) {
+            var table = document.getElementById("studentTable");
+
+            // 创建新行并插入表格中
+            var newRow = table.insertRow(-1);
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+
+            cell1.textContent = studentName;
+            cell2.textContent = studentID;
+            cell3.textContent = studentGender;
+            cell4.innerHTML = '<button onclick="deleteStudent(this)">删除</button><button onclick="editStudent(this)">修改</button>';
+
+            modal.style.display = "none"; // 添加完成后关闭模态框
+        } else {
+            alert("请填写完整的学生信息");
+        }
+    };
+
+    // 删除学生函数
+    function deleteStudent(button) {
+        var row = button.parentElement.parentElement;
+
+        // 获取删除确认模态框元素
+        var deleteModal = document.getElementById("deleteModal");
+        var confirmDeleteButton = document.getElementById("confirmDeleteButton");
+        var cancelDeleteButton = document.getElementById("cancelDeleteButton");
+
+        // 显示删除确认模态框
+        deleteModal.style.display = "block";
+
+        // 确认删除按钮点击事件
+        confirmDeleteButton.onclick = function() {
+            row.remove(); // 删除行
+            deleteModal.style.display = "none"; // 关闭模态框
+        };
+
+        // 取消删除按钮点击事件
+        cancelDeleteButton.onclick = function() {
+            deleteModal.style.display = "none"; // 关闭模态框
+        };
+    }
+
+    // 修改学生函数
+    function editStudent(button) {
+        var row = button.parentElement.parentElement;
+
+        // 获取编辑模态框元素
+        var editModal = document.getElementById("editModal");
+        var updateButton = document.getElementById("updateStudentButton");
+        var closeEditButton = document.querySelector("#editModal .close");
+
+        // 获取输入框和下拉菜单元素
+        var editStudentNameInput = document.getElementById("editStudentNameInput");
+        var editStudentIDInput = document.getElementById("editStudentIDInput");
+        var editStudentGenderInput = document.getElementById("editStudentGenderInput");
+
+        // 预填充原有值
+        editStudentNameInput.value = row.cells[0].textContent;
+        editStudentIDInput.value = row.cells[1].textContent;
+        editStudentGenderInput.value = row.cells[2].textContent;
+
+        // 显示编辑模态框
+        editModal.style.display = "block";
+
+        // 更新按钮点击事件
+        updateButton.onclick = function() {
+            var studentName = editStudentNameInput.value;
+            var studentID = editStudentIDInput.value;
+            var studentGender = editStudentGenderInput.value;
+
+            if (studentName && studentID && studentGender) {
+                row.cells[0].textContent = studentName;
+                row.cells[1].textContent = studentID;
+                row.cells[2].textContent = studentGender;
+
+                // 关闭编辑模态框
+                editModal.style.display = "none";
+            } else {
+                alert("请填写完整的学生信息");
+            }
+        };
+
+        // 关闭编辑模态框按钮点击事件
+        closeEditButton.onclick = function() {
+            editModal.style.display = "none";
+        };
+    }
+</script>

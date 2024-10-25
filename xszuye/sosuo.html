@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="stylesheet" href="/src/style.css">-->
+<!--    <link rel="stylesheet" href="/src/ui/ui.css">-->
+    <style>
+        .niceButton5 {
+            display: inline-block;
+            border-radius: 20px;
+            background-color: #313133;
+            border: none;
+            color: #ffff;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 400;
+            padding: 5px;
+            width: 200px;
+            /*transition: all 0.5s;*/
+            cursor: pointer;
+            margin: 5px;
+            vertical-align: middle;
+            float: right;
+        }
+        .niceButton5 span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+        .niceButton5 span::after {
+            content: "(＠＾◡＾)";
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -60px;
+            transition: 0.5s;
+        }
+        .niceButton5:hover span {
+            padding-right: 80px;
+        }
+        .niceButton5:hover span::after {
+            opacity: 1;
+            right: 0;
+        }
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid black;
+            z-index: 9999;
+        }
+        body,html{
+            background-color: #e8eaef;
+            margin: 0;
+            padding: 0;
+            /*height: 100%;*/
+        }
+        .allss{
+            display: flex;
+            margin: auto;
+            width: 90%;
+            /*height: 2000px;*/
+            background-color: #e8eaef;
+        }
+        .lss{
+            position: fixed; /* 将位置设置为固定 */
+            width: 12%;
+            padding: 1%;
+            /*height: 130px;*/
+            margin-top: 2%;
+            background-color: rgba(255, 255, 255);
+            border-radius: 5px; /* 添加圆角为20px */
+            overflow: hidden; /* 防止内容溢出圆角区域 */
+            left: 5%; /* 根据需要调整固定位置的水平距离 */
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* 添加阴影效果，可根据喜好调整阴影参数 */
+        }
+
+        .lss .ssbq{
+            height: 50px;
+        }
+
+        .ssbq label {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .ssbq button {
+            width: 30px;
+            height: 30px;
+            background-color: rgba(255, 255, 255);
+            background-image: url(/进入.png);
+            background-position: center;
+            background-size: cover;
+            border: none;
+            margin-left: 60px;
+            vertical-align: middle;
+            cursor: pointer;/*	小手*/
+        }
+
+        .rss{
+            margin-top: 2%;
+            width: 75%;
+            margin-left: 18%;
+            background-color: rgba(255, 255, 255);
+            border-radius: 5px; /* 添加圆角为20px */
+            overflow: hidden; /* 防止内容溢出圆角区域 */
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* 添加阴影效果，可根据喜好调整阴影参数 */
+        }
+        .rsstxt{
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(255, 255, 255);
+        }
+        .sstite{
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 15px;
+            margin-bottom: 10px;
+         }
+        #ssinput {
+            margin-left: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            height: 20px;
+            transition: border-color 0.3s; /* 添加过渡效果使边框颜色变化更平滑 */
+        }
+
+        .hangss{
+            display: flex;
+            width: 95%;
+            margin: auto;
+            padding: 10px;
+            height: 150px;
+            background-color: rgba(255, 255, 255);
+        }
+
+        .ssonebox{
+            width: 23%;
+            margin-right: 10px; /* 设置右边距为 10px */
+            margin-left: 10px; /* 设置左边距为 10px */
+            /*background-color: #333333;*/
+            border-radius: 5%; /* 添加圆角为20px */
+            overflow: hidden; /* 防止内容溢出圆角区域 */
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3); /* 添加阴影效果，可根据喜好调整阴影参数 */
+            cursor: pointer; /* 鼠标悬停时显示小手指样式 */
+            transition: transform 0.3s; /* 添加过渡效果使缩放平滑 */
+        }
+        .ssonebox:hover {
+            transform: scale(0.90); /* 鼠标悬停时缩小至原始大小的 0.85 倍 */
+        }
+        .ssonebox .sstupian{
+            height: 70%;
+            background-image: url(/5.jpg);
+            background-position: center;
+            background-size: cover;
+        }
+        .ssonebox .ssnr{
+            padding: 5px;
+        }
+
+    </style>
+    <style>
+        .boards-info {
+            user-select: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .boards-info .boards-container {
+            position: relative;
+            width: 80%;
+            height: 70%;
+            background: #000;
+            padding: 60px 40px 40px;
+            border-radius: 20px;
+            transition: opacity .5s;
+        }
+        .boards-info .boards-container .content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            column-gap: 20px;
+        }
+        .boards-info .boards-container .close {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            cursor: pointer;
+            text-align: center;
+            width: 22px;
+            height: 22px;
+            line-height: 15px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .boards-info .boards-container .close::after {
+            content: "x";
+            font-size: 18px;
+        }
+        .boards-info .boards-container .info {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .boards-info .boards-container .info .title {
+            font-size: 24px;
+        }
+        .boards-info .boards-container .info .author,
+        .boards-info .boards-container .info .htp,
+        .boards-info .boards-container .info .describe {
+            margin-top: 20px;
+            line-height: 30px;
+        }
+        .boards-info .boards-container .img {
+            flex: 1;
+            overflow: hidden;
+        }
+        .boards-info .boards-container .img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="allss">
+        <div class="lss">
+            <div class="ssbq">
+                <label>全部资源</label>
+                <button id="bt1"></button>
+            </div>
+            <div class="ssbq">
+                <label>器材集合</label>
+                <button id="bt2"></button>
+            </div>
+            <div class="ssbq">
+                <label>微观世界</label>
+                <button id="bt3"></button>
+            </div>
+            <div class="ssbq">
+                <label>动物世界</label>
+                <button id="bt4"></button>
+            </div>
+        </div>
+        <div class="rss">
+            <div class="rsstxt">
+                <div class="sstite">全部资源</div>
+                <input id="ssinput"  placeholder="搜索...">
+            </div>
+            <div class="ssboxs">
+            </div>
+        </div>
+    </div>
+    <!-- 画框详情框 -->
+    <div class="boards-info" style="visibility: hidden;">
+        <div class="boards-container hide">
+            <div class="content">
+                <section class="info">
+                    <div class="title"></div>
+                    <div class="htp">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    <br>
+                    <div>
+                        <button class="niceButton5"><span>开始实验</span></button>
+                    </div>
+                </section>
+                <section class="img">
+                    <img src="" alt="">
+                </section>
+            </div>
+            <div class="close boards-info-close"></div>
+        </div>
+    </div>
+</body>
+<script>
+
+    const boxs = [];
+    for (let i = 1; i <= 26; i++) {
+        let box = {
+            url: `/5.jpg`,
+            nr: `内容 ${i}`,
+            tp: '${i}',
+        };
+        boxs.push(box);
+    }
+
+    const ssboxs = document.querySelector('.ssboxs');
+    set(1,`./img/huangchong.jpg`,'蝗虫模型',4);
+    set(2,`./img/zhiwu.jpg`,'植物细胞模型',3);
+    set(3,`./img/inm.jpg`,'动物细胞模型',3);
+    set(24,`./img/dove.jpg`,'鸽子模型',4);
+    set(25,`./img/xijun.jpg`,'细菌模型',3);
+    set(10,`./img/xijun.jpg`,'细菌模型',3);
+    set(6,`./img/egg.jpg`,'鸡蛋模型',3);
+    set(7,`./img/heart.jpg`,'心脏模型',3);
+    set(21,`./img/yumi.jpg`,'玉米模型',3);
+    set(9,`/clc.jpg`,'草履虫模型',4);
+    set(18,`./img/sm.jpg`,'水绵模型',3);
+    set(13,`./img/zhiwu.jpg`,'植物蒸腾模型',3);
+    set(12,`./img/jiyu.jpg`,'鲫鱼模型',4);
+    set(11,`./img/flower.jpg`,'花模型',3);
+    set(14,`./img/zhongzi.jpg`,'种子模型',3);
+    set(15,`/sb.jpg`,'烧杯模型',2);
+    set(16,`/nz.jpg`,'镊子',2);
+    set(17,'/hc.jpg','火柴',2);
+    set(18,'/dg.jpg','滴管',2);
+    set(19,'/jj.jpg','酒精',2);
+    set(20,'/sjj.jpg','三脚架',2);
+    set(8,'/smw.jpg','石棉网',2);
+    set(22,'/dy.jpg','碘液',2);
+    set(23,'/qs.jpg','清水',2);
+    set(4,'/yc.jpg','洋葱',2);
+    set(5,'/xwj.jpg','显微镜',2);
+    set(26,'/zbp.jpg','载玻片',2);
+
+
+
+
+    function set(i,url,nr,tp){
+        boxs[i-1] = {
+            url: url,
+            nr: nr,
+            tp: tp,
+        };
+    }
+
+    // 分组处理，每4个为一组
+    for (let i = 0; i < boxs.length; i += 4) {
+        const hangss = document.createElement('div');
+        hangss.classList.add('hangss');
+
+        for (let j = i; j < i + 4 && j < boxs.length; j++) {
+            const ssonebox = document.createElement('div');
+            ssonebox.classList.add('ssonebox');
+
+            const sstupian = document.createElement('div');
+            sstupian.classList.add('sstupian');
+            sstupian.style.backgroundImage = `url(${boxs[j].url})`;
+
+            const ssnr = document.createElement('div');
+            ssnr.classList.add('ssnr');
+            ssnr.textContent = boxs[j].nr;
+
+            ssonebox.appendChild(sstupian);
+            ssonebox.appendChild(ssnr);
+            hangss.appendChild(ssonebox);
+        }
+        ssboxs.appendChild(hangss);
+        adf();
+    }
+
+
+
+    const selectFilter = document.querySelectorAll('select');
+    const searchInput = document.getElementById('ssinput');
+
+    selectFilter.forEach(select => {
+        select.addEventListener('change', filterTable);
+    });
+
+    searchInput.addEventListener('input', filterTable);
+
+
+    function filterTable() {
+        const searchString = searchInput.value.trim().toLowerCase();
+        ssboxs.innerHTML = ''; // 清空原有内容
+        let box2=[];
+        for (let i = 0; i < boxs.length; i ++) {
+            if(boxs[i].nr.includes(searchString)) box2.push(boxs[i]),console.log(i);
+        }
+
+        for (let i = 0; i < box2.length; i += 4) {
+            const hangss = document.createElement('div');
+            hangss.classList.add('hangss');
+            for (let j = i; j < i + 4 && j < box2.length; j++) {
+                const ssonebox = document.createElement('div');
+                ssonebox.classList.add('ssonebox');
+
+                const sstupian = document.createElement('div');
+                sstupian.classList.add('sstupian');
+                sstupian.style.backgroundImage = `url(${box2[j].url})`;
+
+                const ssnr = document.createElement('div');
+                ssnr.classList.add('ssnr');
+                ssnr.textContent = box2[j].nr;
+
+                ssonebox.appendChild(sstupian);
+                ssonebox.appendChild(ssnr);
+                hangss.appendChild(ssonebox);
+            }
+            ssboxs.appendChild(hangss);
+        }
+        adf();
+    }
+
+    //btn 种类1
+    const bt1 = document.getElementById('bt1');
+    bt1.addEventListener('click', function() {
+        ssboxs.innerHTML = ''; // 清空原有内容
+        let box2=[];
+        for (let i = 0; i < boxs.length; i ++) {
+             box2.push(boxs[i]);
+        }
+
+        for (let i = 0; i < box2.length; i += 4) {
+            const hangss = document.createElement('div');
+            hangss.classList.add('hangss');
+
+            for (let j = i; j < i + 4 && j < box2.length; j++) {
+                const ssonebox = document.createElement('div');
+                ssonebox.classList.add('ssonebox');
+
+                const sstupian = document.createElement('div');
+                sstupian.classList.add('sstupian');
+                sstupian.style.backgroundImage = `url(${box2[j].url})`;
+
+                const ssnr = document.createElement('div');
+                ssnr.classList.add('ssnr');
+                ssnr.textContent = box2[j].nr;
+
+                ssonebox.appendChild(sstupian);
+                ssonebox.appendChild(ssnr);
+                hangss.appendChild(ssonebox);
+            }
+            ssboxs.appendChild(hangss);
+        }
+        adf();
+    })
+
+    //btn 种类2
+    const bt2 = document.getElementById('bt2');
+    bt2.addEventListener('click', function() {
+        ssboxs.innerHTML = ''; // 清空原有内容
+        let box2=[];
+        for (let i = 0; i < boxs.length; i ++) {
+            if(boxs[i].tp==2) box2.push(boxs[i]);
+        }
+
+        for (let i = 0; i < box2.length; i += 4) {
+            const hangss = document.createElement('div');
+            hangss.classList.add('hangss');
+
+            for (let j = i; j < i + 4 && j < box2.length; j++) {
+                const ssonebox = document.createElement('div');
+                ssonebox.classList.add('ssonebox');
+
+                const sstupian = document.createElement('div');
+                sstupian.classList.add('sstupian');
+                sstupian.style.backgroundImage = `url(${box2[j].url})`;
+
+                const ssnr = document.createElement('div');
+                ssnr.classList.add('ssnr');
+                ssnr.textContent = box2[j].nr;
+
+                ssonebox.appendChild(sstupian);
+                ssonebox.appendChild(ssnr);
+                hangss.appendChild(ssonebox);
+            }
+            ssboxs.appendChild(hangss);
+        }
+        adf();
+    })
+
+    //btn 种类3
+    const bt3 = document.getElementById('bt3');
+    bt3.addEventListener('click', function() {
+        ssboxs.innerHTML = ''; // 清空原有内容
+        let box2=[];
+        for (let i = 0; i < boxs.length; i ++) {
+            if(boxs[i].tp==3) box2.push(boxs[i]);
+        }
+
+        for (let i = 0; i < box2.length; i += 4) {
+            const hangss = document.createElement('div');
+            hangss.classList.add('hangss');
+
+            for (let j = i; j < i + 4 && j < box2.length; j++) {
+                const ssonebox = document.createElement('div');
+                ssonebox.classList.add('ssonebox');
+
+                const sstupian = document.createElement('div');
+                sstupian.classList.add('sstupian');
+                sstupian.style.backgroundImage = `url(${box2[j].url})`;
+
+                const ssnr = document.createElement('div');
+                ssnr.classList.add('ssnr');
+                ssnr.textContent = box2[j].nr;
+
+                ssonebox.appendChild(sstupian);
+                ssonebox.appendChild(ssnr);
+                hangss.appendChild(ssonebox);
+            }
+            ssboxs.appendChild(hangss);
+        }
+        adf();
+    })
+
+    //btn 种类4
+    const bt4 = document.getElementById('bt4');
+    bt4.addEventListener('click', function() {
+        ssboxs.innerHTML = ''; // 清空原有内容
+        let box2=[];
+        for (let i = 0; i < boxs.length; i ++) {
+            if(boxs[i].tp==4) box2.push(boxs[i]);
+        }
+
+        for (let i = 0; i < box2.length; i += 4) {
+            const hangss = document.createElement('div');
+            hangss.classList.add('hangss');
+
+            for (let j = i; j < i + 4 && j < box2.length; j++) {
+                const ssonebox = document.createElement('div');
+                ssonebox.classList.add('ssonebox');
+
+                const sstupian = document.createElement('div');
+                sstupian.classList.add('sstupian');
+                sstupian.style.backgroundImage = `url(${box2[j].url})`;
+
+                const ssnr = document.createElement('div');
+                ssnr.classList.add('ssnr');
+                ssnr.textContent = box2[j].nr;
+
+                ssonebox.appendChild(sstupian);
+                ssonebox.appendChild(ssnr);
+                hangss.appendChild(ssonebox);
+            }
+            ssboxs.appendChild(hangss);
+        }
+        adf();
+    })
+
+    // 为每个 ssonebox 元素添加点击事件处理程序
+    function adf() {
+        // 获取所有具有 "ssonebox" 类的元素
+        const ssoneboxes = document.getElementsByClassName('ssonebox');
+        // 将获取到的元素转换为数组
+        const ssoneboxArray = Array.from(ssoneboxes);
+        ssoneboxArray.forEach(ssonebox => {
+            ssonebox.addEventListener('click', function () {
+                // 获取当前 ssonebox 的相关信息
+                const title = '细菌模型';
+                const htp = '微生物是一类微小的生物体，包括细菌、真菌、原生动物和病毒等。它们存在于各种环境中，从地球的深海到高山的冰川，甚至在人类肠道和皮肤上都可以找到微生物的身影。微生物在生态系统中扮演着重要的角色，包括参与分解有机物质、氮循环、碳循环等关键过程。\n' +
+                    '\n' +
+                    '细菌是最常见的微生物之一，它们具有多样的形态和代谢方式，可以生存于各种极端条件下，如高温、高压、酸性或碱性环境。真菌则以其菌丝体结构和分解有机物的能力闻名，其中一些真菌还具有药用价值或产生食品中的发酵产物。\n' +
+                    '\n' +
+                    '原生动物主要存在于水体中，是微生物中的一个重要类别，它们通过摄食或吸收周围溶解有机物来获取营养。而病毒则是一种非细胞的微生物，依靠寄生于宿主细胞内进行复制。\n' +
+                    '\n' +
+                    '总的来说，微生物虽小，却在自然界中扮演着不可或缺的角色，对地球生态系统和人类健康产生着深远影响。深入了解微生物的特性和功能，有助于我们更好地利用它们的潜力，保护环境并促进健康生活。';
+                const imgSrc = './img/xijun.jpg';
+
+                // 更新弹窗中的内容
+                const boardsInfo = document.querySelector('.boards-info');
+                boardsInfo.style.visibility = 'visible';
+                boardsInfo.querySelector('.title').textContent = title;
+                boardsInfo.querySelector('.htp').textContent =htp;
+                boardsInfo.querySelector('img').src = imgSrc;
+
+                // 添加关闭弹窗处理程序
+                const closeBtn = boardsInfo.querySelector('.close.boards-info-close');
+                closeBtn.addEventListener('click', function () {
+                    boardsInfo.style.visibility = 'hidden';
+                });
+
+                // 添加开始实验按钮点击事件处理程序
+                const startExperimentBtn = boardsInfo.querySelector('.niceButton5');
+
+                startExperimentBtn.addEventListener('click', function () {
+                    // 在此处添加开始实验的逻辑
+                    window.open('/html/lab2.html') ; // 更改为您需要跳转的网址
+                });
+
+            });
+        });
+    }
+</script>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        @media screen and (orientation: landscape) {
+            /* 在横屏方向下的样式 */
+            body {
+                background-color: lightblue;
+            }
+        }
+        @media screen and (orientation: portrait) {
+            /* 在竖屏方向下的样式 */
+            body {
+                background-color: lightgreen;
+            }
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            height: 100vh;
+            background-color: #222223;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url(/back1.png);
+            background-position: center;
+            background-size: cover;
+        }
+        .container .images-box {
+            width: 200px;
+            height: 600px;
+            margin: 0 10px;
+            border-radius: 10px;
+            background-image: url(/images/img-01.jfif);
+            background-position: center;
+            background-size: cover;
+            transition: all 0.5s;
+            position: relative;
+        }
+        .container .images-box h3 {
+            position: absolute;
+            left: 20px;
+            /*bottom: 10px;*/
+            color: #fff;
+            opacity: 0;
+            transition: all 0.5s;
+        }
+        .container .images-box button {
+            position: absolute;
+            right: 20px;
+            bottom: 10px;
+            color: #fff;
+            background-color: #313133;
+            opacity: 0; /* 初始时设置按钮透明度为0 */
+            transition: all 0.5s; /* 添加过渡效果 */
+        }
+        .container .images-box:hover button,
+        .container .images-box button:hover {
+            opacity: 1; /* 当鼠标悬停在.images-box上或按钮本身上时显示按钮 */
+        }
+        .container .images-box:hover {
+            width: 400px;
+            height: 650px;
+            box-shadow: 0 0 30px white;
+        }
+        .container .images-box:hover h3 {
+            opacity: 1;
+        }
+        .container .images-box:nth-child(1) {
+            background-image: url(/images/bj1.jpg);
+        }
+        .container .images-box:nth-child(2) {
+            background-image: url(/images/bj2.jpg);
+        }
+        .container .images-box:nth-child(3) {
+            background-image: url(/images/bj3.jpg);
+        }
+        .container .images-box:nth-child(5) {
+            background-image: url(/images/bj4.jpg);
+        }
+        .container .images-box:nth-child(4) {
+            background-image: url(/images/bj5.jpg);
+        }
+        .container .images-box .texts-box {
+            opacity: 0;
+            width: 70%;
+            height: 78%;
+            position: absolute;
+            background-color: #333333;
+            top: 10%;
+            left: 10%;
+            padding: 5%;
+            border-radius: 10px;
+            color: #eeeeee;
+        }
+        .container .images-box:hover .texts-box,
+        .container .images-box .texts-box:hover {
+            background-color: rgba(51, 51, 51, 0.7);
+            opacity: 1; /* 当鼠标悬停在.images-box上或按钮本身上时显示按钮 */
+        }
+        .container .images-box .texts-box p {
+            font-size: 16px;
+            margin-bottom: 10px; /* 添加段落之间的底部间距 */
+        }
+        #go1{
+            background-color: #000000; /* 绿色背景 */
+            padding: 5px 15px;
+            color: white; /* 白色字体 */
+            border: none; /* 移除边框 */
+            border-radius: 5px; /* 圆角边框 */
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* 阴影效果 */
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 15px;
+            text-align: center;
+            display: inline-block;
+        }
+        #go2{
+            background-color: #000000; /* 绿色背景 */
+            padding: 5px 15px;
+            color: white; /* 白色字体 */
+            border: none; /* 移除边框 */
+            border-radius: 5px; /* 圆角边框 */
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* 阴影效果 */
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 15px;
+            text-align: center;
+            display: inline-block;
+        }
+        #go3{
+            background-color: #000000; /* 绿色背景 */
+            padding: 5px 15px;
+            color: white; /* 白色字体 */
+            border: none; /* 移除边框 */
+            border-radius: 5px; /* 圆角边框 */
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* 阴影效果 */
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 15px;
+            text-align: center;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="images-box">
+        <h3>目的要求</h3>
+        <div class="texts-box">
+            <p >1.认识细胞的各个细胞系</p>
+            <p >2.掌握细胞器的作用</p>
+            <p >3.掌握细菌和真菌的区别</p>
+        </div>
+    </div>
+    <div class="images-box">
+        <h3>材料用具</h3>
+        <div class="texts-box">
+            <p >1.细菌</p>
+            <p >2.核糖体</p>
+            <p >3.拟核</p>
+            <p>4.菌毛</p>
+        </div>
+    </div>
+    <div class="images-box">
+        <h3>详细教程</h3>
+        <div class="texts-box">
+            <p >1.使用40倍的物镜和10倍的目镜</p>
+            <p>可以获得400倍的总放大倍率。</p>
+            <p >2.完全关闭聚光灯</p>
+            <p>这将增加对比度和景深。</p>
+            <p >3.使用很少的水</p>
+            <p>制作幻灯片时，请使用很少的水，并确保盖玻片下没有较大的颗粒。盖玻片下面必须有一层薄薄的水。否则，细菌可能会垂直漂浮并失焦。保护玻璃不应漂浮在水上。</p>
+            <p >4.保持低细菌密度</p>
+            <p>如果样品中细菌过多，它们将重叠并且您只会看到一个团块。</p>
+            <button id="go1">开始教程</button>
+        </div>
+    </div>
+    <div class="images-box">
+        <h3>3D实验</h3>
+        <div class="texts-box">
+            <p >里面是显微镜的3D模型</p>
+            <p>你可以自由的对模型进行翻转、放大、缩小。</p>
+            <p>这样可以让同学们更清晰明了的明白各个组件所在的位置。</p>
+            <p>快点进去看看模型吧(o^^o)</p>
+            <button id="go2">开始实验</button>
+        </div>
+    </div>
+    <div class="images-box">
+        <h3>章节测试</h3>
+        <div class="texts-box">
+            <p >看了这么多相信同学们已经对细菌的各个细胞器及作用有了相关的认识。</p>
+            <p>这边准备了一些相关的练习题，同学们测试一下自己都掌握了多少内容。</p>
+            <p>快进去试试吧( ^ω^ )</p>
+            <button id="go3">开始测试</button>
+        </div>
+    </div>
+    <!--      <div class="images-box"><h3>图片名称 5</h3></div>-->
+</div>
+<script>
+    const go2 = document.getElementById('go2');
+    go2.addEventListener('click', (e) => {
+        window.location.href = 'sy3.html'; // 更改为您需要跳转的网址
+    })
+</script>
+</body>
+</html>

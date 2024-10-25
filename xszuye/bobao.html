@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>山羊の前端小窝</title>
+    <style>
+        /* 定义全局变量 */
+        :root {
+            --rotate-speed: 40;
+            --count: 8;
+            --easing: cubic-bezier(0.000, 0.37, 1.000, 0.63);
+        }
+        /* 设置页面样式 */
+        body {
+            margin: 0;
+            display: flex;
+            /*justify-content: center;*/
+            /*align-items: center;*/
+            width: 80%;
+            height: 100%;
+            background-color: rgb(78,134,255,0.6);
+            /*background-image: linear-gradient(to top, #a18cd177 0%, #fbc2eb77 100%);*/
+        }
+
+        /* 设置容器样式 */
+        .void {
+            width: 100%;
+            max-width: 1024px;
+            /*margin: auto;*/
+            position: relative;
+            aspect-ratio: 1 / 1;
+        }
+
+        /* 鼠标悬停时暂停动画 */
+        ul:hover * {
+            animation-play-state: paused;
+        }
+
+        /* 设置列表样式 */
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            z-index: 1;
+        }
+
+        /* 设置列表项样式 */
+        li {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            animation: rotateCW calc(var(--rotate-speed) * 1s) var(--easing) infinite;
+        }
+
+        /* 设置卡片样式 */
+        .card {
+            width: 26%;
+            height: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            background: #FFFFFF;
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.9); /* 添加阴影效果，可根据喜好调整阴影参数 */
+            border-radius: 15%;
+            font: 400 10px '';
+            color: #535062;
+            animation: rotateCCW calc(var(--rotate-speed) * 1s) var(--easing) infinite;
+        }
+
+        /* 设置图片样式 */
+        .card img {
+            width: 100%;
+            height: 100%; /* 添加height属性确保图像填充整个容器 */
+            object-fit: cover; /* 图像按比例缩放并填充整个容器 */
+            border-radius: 15%; /* 添加圆角效果，可以根据需求调整像素值 */
+        }
+
+        /* 设置链接样式 */
+        a {
+            text-decoration: none;
+            color: unset;
+            display: block;
+            height: 80px;
+            overflow: hidden;
+        }
+
+        /* 设置模型名称样式 */
+        .model-name {
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 150%;
+            display: block;
+            letter-spacing: 3px;
+            color: #6844f7;
+        }
+        /* 设置SVG样式 */
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        /* 设置不同列表项的动画延迟 */
+        li:nth-child(2),
+        li:nth-child(2) .card {
+            animation-delay: calc((var(--rotate-speed)/var(--count)) * -1s);
+        }
+        li:nth-child(3),
+        li:nth-child(3) .card {
+            animation-delay: calc((var(--rotate-speed)/var(--count)) * -2s);
+        }
+        li:nth-child(4),
+        li:nth-child(4) .card {
+            animation-delay: calc((var(--rotate-speed)/var(--count)) * -3s);
+        }
+        li:nth-child(5),
+        li:nth-child(5) .card {
+            animation-delay: calc((var(--rotate-speed)/var(--count)) * -4s);
+        }
+        li:nth-child(6),
+        li:nth-child(6) .card {
+            animation-delay: calc((var(--rotate-speed)/var(--count)) * -5s);
+        }
+
+        /* 定义顺时针旋转动画 */
+        @keyframes rotateCW {
+            from {
+                transform: translate3d(0px, -50%, -1px) rotate(-45deg);
+            }
+            to {
+                transform: translate3d(0px, -50%, 0px) rotate(-315deg);
+            }
+        }
+        /* 定义逆时针旋转动画 */
+        @keyframes rotateCCW {
+            from {
+                transform: rotate(45deg);
+            }
+            to {
+                transform: rotate(315deg);
+            }
+        }
+
+        /* 设置中心圆样式 */
+        .center-circle {
+            position: absolute;
+            width: 65px;
+            aspect-ratio: 1 / 1;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: #FFFFFF;
+            box-shadow: 0px 18px 36px -18px rgba(12, 5, 46, 0.3),
+                0px 10px 60px -12px rgba(12, 5, 46, 0.25);
+            border-radius: 50%;
+            background-size: cover;
+            background-position: -35px 0;
+        }
+
+        /* 设置第二个圆样式 */
+        .second-circle {
+            position: absolute;
+            width: 40%;
+            aspect-ratio: 1 / 1;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: #F5F4FE;
+            opacity: 0.5;
+            box-shadow: 0px 18px 36px -18px rgba(12, 5, 46, 0.3),
+                0px 30px 60px -12px rgba(12, 5, 46, 0.25);
+            border-radius: 50%;
+        }
+
+        /* 设置最后一个圆样式 */
+        .last-circle {
+            position: absolute;
+            width: 66%;
+            aspect-ratio: 1 / 1;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: #F5F4FE;
+            opacity: 0.25;
+            box-shadow: 0px 18px 36px -18px rgba(12, 5, 46, 0.3),
+                0px 30px 60px -12px rgba(12, 5, 46, 0.25);
+            border-radius: 50%;
+        }
+
+        /* 设置裁剪样式 */
+        .crop {
+            -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0),
+                    rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 1));
+        }
+
+        /* 设置遮罩样式 */
+        .mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+            background-position: 100% 50%;
+            background-repeat: no-repeat;
+            background-image: radial-gradient(100% 50% at 100% 50%,
+                    rgba(60, 26, 229, 0.25) 0%,
+                    rgba(59, 26, 229, 0.241896) 20%,
+                    rgba(53, 26, 229, 0.1872) 40%,
+                    rgba(41, 23, 240, 0.104) 60%,
+                    rgba(34, 26, 229, 0.0184296) 90%,
+                    rgba(32, 26, 229, 0) 100%);
+        }
+
+        /* 设置遮罩样式后的效果 */
+        .mask:after {
+            content: "";
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            right: 0;
+            display: block;
+            background-image: linear-gradient(180deg, rgba(60, 26, 229, 0) 0%,
+                    #3C1AE5 50%, rgba(60, 26, 229, 0) 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="void" id="void">
+        <div class="crop">
+            <ul id="card-list" style="--count: 6;">
+                <li>
+                    <div class="card" id="cd1">
+                        <a href="">
+                            <img src="./img/dove.jpg" alt="">
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="card" id="cd2">
+                        <a href="">
+                            <img src="./img/egg.jpg" alt="">
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="card" id="cd3"><a href="">
+                        <img src="./img/yumi.jpg" alt="">
+                        </a></div>
+                </li>
+                <li>
+                    <div class="card" id="cd4">
+                        <a href="">
+                            <img src="./img/huangchong.jpg" alt="">
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="card" id="cd5"><a href="">
+                        <img src="./img/inm.jpg" alt="">
+                        </a></div>
+                </li>
+                <li>
+                    <div class="card" id="cd6">
+                        <a href="">
+                            <img src="./img/xijun.jpg" alt="">
+                        </a>
+                    </div>
+                </li>
+            </ul>
+            <div class="last-circle"></div>
+            <div class="second-circle"></div>
+        </div>
+        <div class="mask"></div>
+        <div class="center-circle"></div>
+        <div>
+</body>
+<script>
+
+    for(let i=1;i<=6;i++){
+        const  t1= document.getElementById('cd'+i);
+        t1.addEventListener('click', (e) => {
+            window.open('/html/sy2.html') ; // 更改为您需要跳转的网址
+        })
+    }
+
+</script>
+</html>

@@ -1,0 +1,288 @@
+body{
+    background-color: #222223;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    display: flex;
+    width: 100%;
+    height: 80%;
+    /*margin: 0 auto; !* 水平居中的关键：左右自动间距 *!*/
+    /*margin-left:20%;*/
+}
+.topbox{
+    display: flex;
+    height: 50px;
+    /*padding: 10px;*/
+    align-items: center; /* 上下垂直居中对齐 */
+    background-color: #222223;
+}
+.endbox{
+    /*width: 100%;*/
+    height: 30px;
+    padding: 10px;
+    background-color: #222223;
+    text-align: right;
+}
+#tlyd{
+    vertical-align: middle;
+    color: #e3dcdc;
+    font-size: 24px;
+    cursor: pointer;
+    padding-right: 5%;
+}
+#tlyd:hover{
+    font-size: 24px;
+    cursor: pointer;
+}
+#taolun{
+    vertical-align: middle;
+    width: 40px; /* 调整图像宽度 */
+    height: 40px; /* 调整图像高度 */
+}
+#labtxt{
+    vertical-align: middle;
+    color: #e3dcdc;
+    font-size: 20px;
+}
+#back{
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.leftbox {
+    width: 20%;
+    padding: 20px;
+    background-color: #222223;
+    float: left;
+}
+.center{
+    padding: 5px;
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+#上{
+    /*height: 40px;*/
+    width: 40px;
+}
+#上:active {
+    transform: scale(0.85); /* 按钮按下时缩小一点 */
+}
+#左{
+    height: 40px;
+    margin: 0 5px;
+}
+#左:active {
+    transform: scale(0.85); /* 按钮按下时缩小一点 */
+}
+#中{
+    height: 40px;
+    margin: 0 5px;
+}
+#中:active {
+    transform: scale(0.85); /* 按钮按下时缩小一点 */
+}
+#右{
+    height: 40px;
+    margin: 0 5px;
+}
+#右:active {
+    transform: scale(0.85); /* 按钮按下时缩小一点 */
+}
+#下{
+    width: 40px;
+}
+#下:active {
+    transform: scale(0.85); /* 按钮按下时缩小一点 */
+}
+#sysm{
+    margin: 15% 0;
+    width: 100%;
+    height: 60%;
+    border-radius: 5px; /* 圆角边框 */
+    /*box-shadow: 0 0 2px #e8eaef;*/
+    transition: opacity 1s; /* 设置透明度过渡效果 */
+    background-image: url(/提示.png);
+    /*background-position: center;*/
+    background-size: cover;
+}
+#sysm p{
+    color: #eeeeee ;
+    font-size: 15px;
+}
+.rightbox {
+    width: 30%;
+    background-color: #222223;
+    padding: 20px;
+    float: left;
+}
+#labimg{
+    display: flex;
+    width: 100%;
+    flex-direction: column; /* 垂直排列子元素 */
+    align-items: center; /* 水平居中对齐 */
+}
+.circle {
+    width: 100px; /* 圆形容器的宽度 */
+    height: 100px; /* 圆形容器的高度 */
+    border-radius: 50%; /* 让容器呈现圆形 */
+    overflow: hidden; /* 隐藏超出容器部分的内容 */
+    border: 10px solid #100e0e; /* 添加黑色边框，宽度为2px */
+    background-image: url(/labmap/lab1/lab1.jpg);
+    background-position: center;
+    background-size: cover;
+    box-shadow: 0 0 10px #e8eaef;
+}
+.circle img {
+    width: 100%; /* 图片宽度占满容器 */
+    height: auto; /* 根据宽度自动调整高度 */
+    display: block; /* 块级元素，使图像水平居中 */
+}
+#imgbtn{
+    margin-top: 20px; /* 设置按钮与圆之间的垂直间距 */
+    background-color: #4CAF50; /* 绿色背景 */
+    color: white; /* 白色字体 */
+    padding: 10px 20px; /* 按钮内边距 */
+    border: none; /* 移除边框 */
+    border-radius: 5px; /* 圆角边框 */
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* 阴影效果 */
+}
+#imgbtn:active {
+    transform: scale(0.95); /* 按钮按下时缩小一点 */
+}
+#model {
+    width: 80%;
+    height: 600px;
+    background-color: #222223;
+}
+.tag {
+    /*width: 120px;*/
+    height: 20px;
+    padding: 10px;
+    color: #fff;
+    background-color: rgb(20, 143, 211, 0.68);
+    box-shadow: 0 0 12px rgba(0, 128, 255, 0.75);
+    border: 1px solid rgba(127, 177, 255, 0.75);
+    font-size: 14px; /* 添加字体大小 */
+}
+.tag:hover {
+    background-color: rgb(20, 143, 211); /* 鼠标悬停时改变背景颜色 */
+    box-shadow: 0 0 18px rgba(0, 128, 255, 0.9); /* 鼠标悬停时改变阴影效果 */
+}
+/* 弹窗容器样式 */
+#popup {
+    position: fixed;
+    top: 30%;
+    height: 400px;
+    width: 300px;
+    transform: translate(-50%, -50%);
+    background-color: rgb(0, 0, 0,0.3);
+    padding: 10px;
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+    border-radius: 10px;
+    z-index: 9999;
+    box-shadow: 0 0 5px #e8eaef;
+}
+#toppopup{
+    position: fixed;
+    top: 10%;
+    left: 20%;
+    height: 500px;
+    width: 60%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(0, 0, 0,0.7);
+    padding: 10px;
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+    border-radius: 10px;
+    z-index: 9999;
+    box-shadow: 0 0 5px #e8eaef;
+    opacity:1;
+}
+#tlydtxt{
+    height: 90%;
+    width: 94%;
+    border-radius: 5px;
+    padding: 3%;
+    background-color: rgb(35, 35, 38,0.7);
+    opacity:1;
+    box-shadow: 0 0 3px white;
+    overflow: hidden; /* 隐藏溢出内容 */
+}
+.tlydtxt .expanded {
+    max-height: 500px; /* 展开后的最大高度 */
+    overflow: hidden; /* 隐藏溢出内容 */
+}
+#tlyd1{
+    display: flex;
+    align-items: center;
+}
+#tl{
+    width: 80px;
+    height: 60px;
+    background-image: url(/icon/tl.png);
+    background-size: 100% 100%; /* 图片拉伸以适应元素大小 */
+    background-position: center; /* 图片在元素中居中显示 */
+    background-repeat: no-repeat; /* 不重复显示背景图片 */
+}
+#tlydbq{
+    color: #cccccc;
+    margin-left: 3%; /* 调整字体和图片之间的间距 */
+    font-size: 30px;
+    font-weight: bold;
+    opacity:1;
+}
+.content {
+    margin-top: 2%; /* 设置顶部间距为 20px */
+    margin-bottom: 2%; /* 设置底部间距为 20px */
+    max-height: 500px; /* 初始最大高度 */
+    overflow: hidden; /* 隐藏超出部分 */
+    transition: max-height 0.5s ease; /* 添加过渡效果 */
+}
+.content .ques{
+ display: flex;
+}
+.content .ques label{
+    display: flex;
+    color: #e8eaef;
+    font-size: 26px; /* 字体大小 */
+    line-height: 1.5; /* 行高（间距）为字体大小的 1.5 倍 */
+}
+.content .ques button{
+    background-color: transparent; /* 设置背景透明 */
+    border: none; /* 移除边框 */
+    color: #9e9fa1;
+    font-size: 20px; /* 字体大小 */
+    line-height: 1.5; /* 行高（间距）为字体大小的 1.5 倍 */
+}
+.content p{
+    color: #22C55E;
+    font-size: 20px; /* 字体大小 */
+    line-height: 1.5; /* 行高（间距）为字体大小的 1.5 倍 */
+}
+#timg{
+    height: 60%;
+    width: 300px;
+    border-radius: 5px;
+    /*background-color: rgba(51, 51, 51, 0.8);*/
+    /*background-image: url(/img/img-02.jpg);*/
+    background-position: center;
+    background-size: cover;
+    box-shadow: 0 0 3px white;
+}
+#ttxt{
+    height: 35%;
+    width: 290px;
+    padding: 5px;
+    color: #eeeeee;
+    border-radius: 5px;
+    background-color: #16A34A;
+    line-height: 1.5; /* 设置行间距为字体大小的1.5倍 */
+    box-shadow: 0 0 3px white;
+}

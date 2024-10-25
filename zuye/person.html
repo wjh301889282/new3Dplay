@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body,html{
+        margin: 0;
+        padding: 0;
+        background-color: #d9d9d9;
+    }
+    .my-info{
+        margin-top: 3%;
+        width: 70%;
+        height: 70vh;
+        border-radius: 20px;
+        background-color: rgb(255, 255, 255);
+        margin-left: 15%;
+        padding: 10px;
+        box-shadow: 0 0 20px #1f05b4;
+    }
+    .alldiv{
+        height: 90%;
+        display: flex;
+    }
+    .lbox {
+        width: 50%;
+        height: 100%;
+        padding: 20px;
+    }
+
+    #grzx {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        margin-left: 30%;
+    }
+
+    .himgbox {
+
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .himg {
+        width: 100px;
+        height: 100px;
+        background-color: #22C55E;
+        background-image: url(/txbj.png);
+        background-repeat: no-repeat;
+        background-size:100% 100% ;
+        border-radius: 50%;
+        margin-left: 20px;
+    }
+
+    #bs0 {
+        padding: 5px 10px;
+        background-color: #007bff;
+        margin-top: 20px;
+        margin-left: 30px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    #bs0:hover {
+        background-color: #0056b3;
+    }
+
+    .pinfo {
+        margin-left: 30px;
+    }
+
+    .na {
+        margin-bottom: 10px;
+    }
+
+    .tname {
+        width: 70%;
+        padding: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .rbox {
+        width: 50%;
+        height: 100%;
+    }
+
+    .tit1 {
+        margin-top: 5%;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+    .tit2{
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+    .pinfo2 {
+    }
+
+    .na1 {
+        margin-bottom: 5px;
+    }
+
+    .qinfo {
+        width: 70%;
+        padding: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .bs1,
+    .bs2 {
+        padding: 5px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .bs1:hover,
+    .bs2:hover {
+        background-color: #0056b3;
+    }
+
+    .cpwd {
+    }
+
+    .cpwd label {
+        margin-bottom: 10px;
+    }
+
+    .cpwd input {
+        margin-top: 10px;
+        padding: 5px;
+    }
+    .bc {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 45%;
+    }
+    .bc:hover {
+        background-color: #0056b3;
+    }
+</style>
+<body>
+<div class="my-info">
+        <div class="alldiv">
+            <div class="lbox">
+                <div  id="grzx">个人基本信息</div>
+                <div class="himgbox">
+                    <div class="himg"></div>
+                    <button  id="bs0">修改头像</button>
+                </div>
+
+                <div class="pinfo">
+                    <div style="height: 12px"></div>
+                    <div class="na">姓名</div>
+                    <input class="tname" type="text"  placeholder="wujiahui">
+                    <div class="na">昵称</div>
+                    <input class="tname" type="text"  placeholder="wujiahui">
+                    <div class="na">身份证号</div>
+                    <input class="tname" type="text"  placeholder="350139200305232873">
+                </div>
+
+            </div >
+            <div  class="rbox">
+                <div class="tit1">安全中心</div>
+                <div class="pinfo2">
+                    <div class="na1">绑定邮箱</div>
+                    <input class="qinfo" type="text"  placeholder="wujiahui"> <button class="bs1">绑定</button>
+                    <div class="na1">绑定手机号</div>
+                    <input class="qinfo" type="text"  placeholder="绑定手机号，使账号更安全"> <button class="bs2">绑定</button>
+                </div>
+
+                <div class="tit2">修改密码</div>
+                <div class="cpwd">
+                    <label>原密码:</label><br>
+                    <input class="qinfo" placeholder="原密码"><br>
+                    <label>新密码:</label><br>
+                    <input class="qinfo" placeholder="8-16位，包含数字、字母"><br>
+                    <label>确认密码:</label><br>
+                    <input class="qinfo" placeholder="再次输入新密码"><br>
+                </div>
+            </div>
+        </div>
+        <button class="bc">保存</button>
+</div>
+</body>
+</html>
+<script>
+
+</script>

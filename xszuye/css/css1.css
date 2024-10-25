@@ -1,0 +1,248 @@
+.min1{
+    width: 100%;
+    background-color: rgb(243,246,250);
+    /*background-image: url("../images/IMG3.jpg");*/
+    background-position: center;
+    background-size: cover;
+}
+.container {
+    display: flex;
+    width: 80%;
+    margin: 0 10%; /* 设置上下和左右边距为10% */
+    text-align: center;
+}
+#paihan{
+    margin-top: 10px;
+    width: 60%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 5px; /* 图像圆角 */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); /* 添加阴影效果，可根据喜好调整阴影参数 */
+    background-color: #1f05b4;
+}
+.tp1{
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    background-image: url(/排行.png);
+    background-position: center;
+    background-size: cover;
+}
+.ph1{
+    margin-left: 10px;
+    color: rgb(255,255,255);
+    font-size: 25px;
+}
+#tite{
+    display: flex;
+    height: 15%;
+    background-color: #4b5cbd;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    align-items: center; /* 垂直居中对齐 */
+}
+#tbox{
+    height: 100%;
+    width: 30%;
+    background-image: url(/sc.png);
+    background-position: center;
+    background-size: cover;
+}
+#rbox{
+    display: flex;
+    height: 100%;
+    width: 70%;
+    background-color: rgb(243,246,250);
+}
+#daka{
+    width: 40%;
+    height: 400px;
+    background-color: rgb(255, 255, 255,0);
+    border-radius: 10px;
+}
+#daka iframe{
+    width: 100%;
+    height: 100%;
+    margin-left: 20%; /* 设置左边距为20px */
+    margin-top: 2%; /* 设置上边距为20px */
+    border: none;
+}
+main.table {
+    width: 50%;
+    height: 100%;
+    background-color: #fff5;
+    overflow: hidden;
+}
+h3 {
+    color: #242F3E;
+}
+.tjx{
+    margin-left: 10px;
+    font-size: 26px;
+    color: #242F3E;
+    font-weight: bold;
+}
+.gonggao{
+    margin-top: 10px;
+    margin-left: 5%;
+    width: 90%;
+    height: 30%;
+    border-radius: 5px; /* 图像圆角 */
+    background-color: rgb(255,255,255);
+    overflow: hidden; /* 防止内容溢出圆角区域 */
+}
+.gonggao p{
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+}
+.header {
+    width: 100%;
+    height: 10%;
+    background-color: #fff4;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .input-group {
+    width: 35%;
+    height: 50%;
+    background-color: #fff5;
+    padding: 0 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .2s;
+}
+
+.header .input-group:hover {
+    width: 45%;
+    background-color: #fff8;
+    box-shadow: 0 5px 40px #0002;
+}
+
+.header .input-group img {
+    width: 20px;
+    height: 20px;
+}
+
+.header .input-group input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.ph {
+    width: 95%;
+    max-height: calc(90% - 25px);
+    background-color: #fffb;
+    margin: 8px auto;
+    overflow: auto;
+}
+
+.ph::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+table {
+    width: 100%;
+}
+td img {
+    width: 30px;
+    height: 30px;
+    margin-right: 6px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    padding: 6px;
+    text-align: left;
+    color: #242F3E;
+    font-size: 12px;
+}
+
+thead th {
+    position: sticky;
+    background-color: #d5d1defe;
+    cursor: pointer;
+}
+/* 偶数行背景色 */
+tbody tr:nth-child(even) {
+    background-color: #0000000b;
+}
+tbody tr:hover {
+    background-color: #fff6 !important;
+}
+.container2{
+    display: flex;
+    width: 80%;
+    height: 100%;
+    margin: 2% 10%; /* 设置上下和左右边距为10% */
+}
+#leftbox{
+    width: 56%;
+    padding: 2%;
+    /*background-color: #17c8d3;*/
+    border-radius: 5px; /* 添加圆角为20px */
+    overflow: hidden; /* 防止内容溢出圆角区域 */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4); /* 添加阴影效果，可根据喜好调整阴影参数 */
+}
+#leftbox .father{
+    margin-top: 3%;
+    display: flex;
+    height: 100%;
+}
+#leftbox .leftbox1{
+    width: 50%;
+    height: 90%;
+    background-color: #9a6e3a;
+}
+#leftbox .leftbox2{
+    width: 50%;
+    height: 90%;
+    background-color: #0c2b2d;
+}
+.kecheng{
+    cursor: pointer;/*	小手*/
+    display: flex;
+    height: 25%;
+    background-color: rgb(255,255,255);
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+.kecheng img{
+    height: 80%;
+    width: 60%;
+    border-radius: 5px; /* 图像圆角 */
+}
+.kcnr{
+    justify-content: flex-start; /* 顶部对齐 */
+    padding: 0 10px; /* 可根据需要进行调整 */
+}
+.lb1{
+    color: #242F3E;
+    font-size: 18px;
+}
+.lb2{
+    color: #242F3E;
+    font-size: 12px;
+}
+#rightbox{
+    margin-left: 3%;
+    width: 37%;
+    border-radius: 5px; /* 添加圆角为20px */
+    overflow: hidden; /* 防止内容溢出圆角区域 */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4); /* 添加阴影效果，可根据喜好调整阴影参数 */
+}
+#rightbox iframe{
+    width: 100%;
+    height: 60%;
+    /*margin-left: 15%; !* 设置左边距为20px *!*/
+    /*margin-top: 2%; !* 设置上边距为20px *!*/
+    border: none;
+}

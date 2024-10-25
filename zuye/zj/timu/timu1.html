@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body,html{
+        background-color: #222223;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+    .alltimu{
+        width: 80%;
+        display: flex;
+        margin: 0 auto; /* 水平居中 */
+    }
+    .lefttimu{
+        margin-top: 1%;
+        width: 280px;
+        background-color: #e8eaef;
+        position: fixed;
+        padding: 10px;
+        /*top: 10px; !* 设置元素距离顶部的距离 *!*/
+        left: 10%; /* 将元素固定在屏幕左侧 */
+        border-radius: 10px;
+        box-shadow: 0 0 5px #e8eaef;
+    }
+    .lbt{
+        width: 260px;
+        padding: 10px;
+        border-bottom: 3px solid #333333; /* 添加蓝色下边框 */
+    }
+    .xzbq{
+        display: flex;
+        padding: 8px;
+    }
+    .tmtj{
+        margin-top: 10px;
+        height: 30px;
+        width: 100%;
+    }
+    .righttimu{
+        margin-top: 1%;
+        width: 60%;
+        padding: 10px;
+        margin-left: 320px;
+        background-color: #eeeeee;
+        border-radius: 10px;
+        box-shadow: 0 0 5px #eeeeee;
+    }
+    .timubox{
+        display: flex;
+    }
+    .timubox .timuid{
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+    .timus{
+        margin-bottom: 30px;
+        background-color: #eeeeee;
+    }
+    .timus .timuss{
+        padding: 10px;
+        width: 600px;
+        border-bottom: 3px solid #333333; /* 添加蓝色下边框 */
+    }
+    .xun {
+        margin-top: 10px;
+        display: flex;
+    }
+    .xunze {
+        margin-right: 5px;
+    }
+    input[type="radio"] {
+        display: none; /* 隐藏原生的单选按钮 */
+    }
+    input[type="radio"] + label {
+        cursor: pointer;
+        padding: 5px 10px;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        text-align: center; /* 水平居中 */
+    }
+    .bqbtn{
+        cursor: pointer;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        width: 30px;
+        height: 30px;
+        margin-right: 7px;
+        border-radius: 50%;
+        text-align: center; /* 水平居中 */
+    }
+    input[type="radio"]:checked + label {
+        background-color: #17c8d3; /* 修改选中时的背景颜色 */
+        color: white; /* 修改文字颜色 */
+    }
+    .xznr{
+        padding: 5px 10px;
+    }
+</style>
+<body>
+    <div class="alltimu">
+        <div class="lefttimu">
+            <div class="lbt">选择题</div>
+            <div class="xzbq">
+                <button class="bqbtn">1</button>
+                <button class="bqbtn">2</button>
+                <button class="bqbtn">3</button>
+                <button class="bqbtn">4</button>
+                <button class="bqbtn">5</button>
+                <button class="bqbtn">6</button>
+                <button class="bqbtn">7</button>
+            </div>
+            <div class="xzbq">
+                <button class="bqbtn">8</button>
+                <button class="bqbtn">9</button>
+                <button class="bqbtn">10</button>
+                <button class="bqbtn">11</button>
+                <button class="bqbtn">12</button>
+            </div>
+            <div class="lbt">填空</div>
+            <div class="xzbq">
+                <button class="bqbtn">1</button>
+                <button class="bqbtn">2</button>
+                <button class="bqbtn">3</button>
+                <button class="bqbtn">4</button>
+                <button class="bqbtn">5</button>
+                <button class="bqbtn">6</button>
+                <button class="bqbtn">7</button>
+            </div>
+            <div class="xzbq">
+                <button class="bqbtn">8</button>
+                <button class="bqbtn">9</button>
+            </div>
+            <button class="tmtj">提交</button>
+        </div>
+        <div class="righttimu">
+            <h3>测试卷1</h3>
+        </div>
+    </div>
+</body>
+<script>
+    const questions = [];
+
+    for (let i = 1; i <= 10; i++) {
+        let question = {
+            question: `Question ${i}`,
+            options: [`Option A${i}`, `Option B${i}`, `Option C${i}`, `Option D${i}`]
+        };
+        questions.push(question);
+    }
+    function set(i,tite,a,b,c,d){
+        questions[i-1] = {
+            question: tite,
+            options: [a,b,c,d]
+        };
+    }
+    set(1,'显微镜观察时，光线较暗，应使用',
+        '小光圈、平面镜','大光圈、凹面镜','小光圈凹面镜','大光圈、平面镜');
+    set(2,'动物体内各种类型细胞的细胞中，具有最高全能性的是',
+        '体细胞','生殖细胞','受精卵','肝细胞');
+    set(3,'神经调节的特点是',
+        '作用迅速，准确和短暂','反应速率快，作用时间长','调节幅度小','反应缓慢，作用时间短');
+    set(4,'植物细胞中具有半自主性的细胞器',
+        '线粒体','高尔基体','内质网','细胞膜');
+    set(5,'植物细胞和动物细胞的主要区别',
+        '液泡','细胞壁','中心体','细胞膜');
+    set(6,'绿色植物在生态系统中的地位',
+        '分解者','传递着','生产者','消费者');
+    set(7,'在质外体的水运输过程中，哪种结构控制矿质盐进入木质部',
+        '胞间连丝','内皮层','中柱鞘','内质网');
+    set(8,'细胞的胞间连丝是',
+        '微丝','居间纤维','原生质丝','纤维');
+    set(9,'单子叶植物叶片表皮层中有许多泡状运动细胞，它们分布于叶片的哪个面',
+        '腹面','背面','上面','下面');
+    set(10,'麦在春季拔节主要是因哪种组织起作用',
+        '顶端分生组织','居间分生组织','侧生分生组织','尾端分生组织');
+
+
+
+    const allQuestionsDiv = document.querySelector(".righttimu");
+
+    questions.forEach((q, index) => {
+        const questionDiv = document.createElement("div");
+        questionDiv.className = "timubox";
+
+        const questionId = document.createElement("div");
+        questionId.className = "timuid";
+        questionId.textContent = `${index + 1}、`;
+        questionDiv.appendChild(questionId);
+
+        const questionContentDiv = document.createElement("div");
+        questionContentDiv.className = "timus";
+
+        const questionContent = document.createElement("div");
+        questionContent.className = "timuss";
+        questionContent.textContent = q.question;
+        questionContentDiv.appendChild(questionContent);
+
+        q.options.forEach((option, optionIndex) => {
+            const optionDiv = document.createElement("div");
+            optionDiv.className = "xun";
+
+            const inputRadio = document.createElement("input");
+            inputRadio.type = "radio";
+            inputRadio.id = `option_${index}_${optionIndex}`;
+            inputRadio.name = `question_${index}`;
+            inputRadio.value = option;
+
+            const labelLetter = document.createElement("label");
+            labelLetter.htmlFor = `option_${index}_${optionIndex}`;
+            labelLetter.textContent = String.fromCharCode(65 + optionIndex);
+            labelLetter.className = "xunze";
+
+            const labelOption = document.createElement("label");
+            labelOption.htmlFor = `option_${index}_${optionIndex}`;
+            labelOption.textContent = option;
+            labelOption.className = "xznr";
+
+            optionDiv.appendChild(inputRadio);
+            optionDiv.appendChild(labelLetter);
+            optionDiv.appendChild(labelOption);
+
+            questionContentDiv.appendChild(optionDiv);
+        });
+
+        questionDiv.appendChild(questionContentDiv);
+
+        allQuestionsDiv.appendChild(questionDiv);
+    });
+</script>
+</html>
